@@ -1,0 +1,66 @@
+      ConcentricCirclesPainter
+      
+      /* final arcPath = Path()
+        ..moveTo(centerX, centerY)
+        ..arcTo(
+          Rect.fromCircle(
+            center: Offset(centerX, centerY),
+            radius: radiusStep * 10,
+          ),
+          startAngle,
+          sectionAngle,
+          false,
+        )
+        ..arcTo(
+          Rect.fromCircle(
+            center: Offset(centerX, centerY),
+            radius: radiusStep * 5,
+          ),
+          endAngle,
+          -sectionAngle,
+          false,
+        )
+        ..close();
+
+      final paint = Paint()
+        ..color = _getValueColor(6)
+        ..style = PaintingStyle.fill
+        ..strokeWidth = lineWidth;
+
+         canvas.drawPath(arcPath, paint);
+
+      final arcPath2 = Path()
+        ..moveTo(centerX, centerY)
+        ..arcTo(
+          Rect.fromCircle(
+            center: Offset(centerX, centerY),
+            radius: radiusStep * 5,
+          ),
+          startAngle,
+          sectionAngle,
+          false,
+        )
+        ..arcTo(
+          Rect.fromCircle(
+            center: Offset(centerX, centerY),
+            radius: radiusStep * 1,
+          ),
+          endAngle,
+          -sectionAngle,
+          false,
+        )
+        ..close();
+
+      final paint2 = Paint()
+        ..color = _getValueColor(0)
+        ..style = PaintingStyle.fill
+        ..strokeWidth = lineWidth;
+
+      canvas.drawPath(arcPath2, paint2);
+*/
+      
+
+
+
+
+      
