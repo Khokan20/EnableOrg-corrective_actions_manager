@@ -59,51 +59,51 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
       // Group 1: Blue Gradient
       ColourLevelListDTO(
         colourLevelList: [
-       ColourLevelDTO(level: 1, color: Color(0xFF0070C0)),
-      ColourLevelDTO(level: 2, color: Color(0xFF0070C0)),
-      ColourLevelDTO(level: 3, color: Color(0xFF0070C0)),
-      ColourLevelDTO(level: 4, color: Color(0xFF002060)),
-      ColourLevelDTO(level: 5, color: Color(0xFF002060)),
+          ColourLevelDTO(level: 1, color: Color(0xFF0070C0)),
+          ColourLevelDTO(level: 2, color: Color(0xFF0070C0)),
+          ColourLevelDTO(level: 3, color: Color(0xFF0070C0)),
+          ColourLevelDTO(level: 4, color: Color(0xFF002060)),
+          ColourLevelDTO(level: 5, color: Color(0xFF002060)),
         ],
       ),
       // Group 2: Green Gradient
       ColourLevelListDTO(
         colourLevelList: [
-         ColourLevelDTO(level: 1, color: Color(0xFF93D04F)),
-      ColourLevelDTO(level: 2, color: Color(0xFF93D04F)),
-      ColourLevelDTO(level: 3, color: Color(0xFF93D04F)),
-      ColourLevelDTO(level: 4, color: Color(0xFF00B050)),
-      ColourLevelDTO(level: 5, color: Color(0xFF00B050)),
+          ColourLevelDTO(level: 1, color: Color(0xFF93D04F)),
+          ColourLevelDTO(level: 2, color: Color(0xFF93D04F)),
+          ColourLevelDTO(level: 3, color: Color(0xFF93D04F)),
+          ColourLevelDTO(level: 4, color: Color(0xFF00B050)),
+          ColourLevelDTO(level: 5, color: Color(0xFF00B050)),
         ],
       ),
       // Group 3: Red Gradient
       ColourLevelListDTO(
         colourLevelList: [
-        ColourLevelDTO(level: 1, color: Color(0xFF900403)),
-      ColourLevelDTO(level: 2, color: Color(0xFF900403)),
-      ColourLevelDTO(level: 3, color: Color(0xFF900403)),
-      ColourLevelDTO(level: 4, color: Color(0xFFC00000)),
-      ColourLevelDTO(level: 5, color: Color(0xFFC00000)),
+          ColourLevelDTO(level: 1, color: Color(0xFF900403)),
+          ColourLevelDTO(level: 2, color: Color(0xFF900403)),
+          ColourLevelDTO(level: 3, color: Color(0xFF900403)),
+          ColourLevelDTO(level: 4, color: Color(0xFFC00000)),
+          ColourLevelDTO(level: 5, color: Color(0xFFC00000)),
         ],
       ),
       // Group 4: Yellow/Orange Gradient
       ColourLevelListDTO(
         colourLevelList: [
-        ColourLevelDTO(level: 1, color: Color(0xFFFFC000)),
-      ColourLevelDTO(level: 2, color: Color(0xFFFFC000)),
-      ColourLevelDTO(level: 3, color: Color(0xFFFFC000)),
-      ColourLevelDTO(level: 4, color: Color(0xFFFFFF00)),
-      ColourLevelDTO(level: 5, color: Color(0xFFFFFF00)),
+          ColourLevelDTO(level: 1, color: Color(0xFFFFC000)),
+          ColourLevelDTO(level: 2, color: Color(0xFFFFC000)),
+          ColourLevelDTO(level: 3, color: Color(0xFFFFC000)),
+          ColourLevelDTO(level: 4, color: Color(0xFFFFFF00)),
+          ColourLevelDTO(level: 5, color: Color(0xFFFFFF00)),
         ],
       ),
       // Group 5: Cyan Gradient
       ColourLevelListDTO(
         colourLevelList: [
           ColourLevelDTO(level: 1, color: Color(0xFF01D29C)),
-      ColourLevelDTO(level: 2, color: Color(0xFF01D29C)),
-      ColourLevelDTO(level: 3, color: Color(0xFF01D29C)),
-      ColourLevelDTO(level: 4, color: Color(0xFF009BA5)),
-      ColourLevelDTO(level: 5, color: Color(0xFF009BA5)),
+          ColourLevelDTO(level: 2, color: Color(0xFF01D29C)),
+          ColourLevelDTO(level: 3, color: Color(0xFF01D29C)),
+          ColourLevelDTO(level: 4, color: Color(0xFF009BA5)),
+          ColourLevelDTO(level: 5, color: Color(0xFF009BA5)),
         ],
       ),
     ],
@@ -113,7 +113,6 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
   void initState() {
     super.initState();
     _loadCircleConfig();
-
   }
 
   _loadCircleConfig() async {
@@ -121,7 +120,6 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
     circleConfigPulse = (await managerHomePageController.getPulseConfig());
     circleConfigWB = (await managerHomePageController.getWBConfig());
     setState(() {});
-
   }
 
   @override
@@ -186,9 +184,9 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
                     // Use horizontal layout for larger screens
                     return Column(children: [
                       Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             if (circleConfigPRC != null)
                               SizedBox(
                                 width: circleWidth,
@@ -264,7 +262,7 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
                               width: circleWidth,
                               height: circleHeight,
                             ),
-                        ),
+                          ),
                         SizedBox(height: smallScreenHeightSpacing),
                         // Add more widgets as needed for Pulse Climate
                         SizedBox(height: scrollOffset),
@@ -292,9 +290,9 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
                                     width: circleWidth,
                                   ),
                                 ),
-                              // Add more widgets as needed for Pulse Climate
-                            ],
-                          ),
+                                // Add more widgets as needed for Pulse Climate
+                              ],
+                            ),
                         ]),
                         SizedBox(
                           height: smallScreenHeightSpacing,

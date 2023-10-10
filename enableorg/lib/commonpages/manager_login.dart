@@ -31,109 +31,131 @@ class _ManagerLoginPageState extends State<ManagerLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey, // Set the form key here
-            child: Column(
-              children: [
-                SizedBox(
-                  width: 600,
-                  height: 196,
-                  child: Image.asset('logo.png'),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Manager Login ',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 5, 36, 83),
-                    fontSize: 20,
-                    fontFamily: 'Cormorant Garamond',
-                    fontWeight: FontWeight.bold,
+        child: Container(
+          width: 400,
+          height: 572,
+          decoration: BoxDecoration(
+            color: Colors.white, // Background color of the container
+            borderRadius: BorderRadius.circular(10), // Border radius
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5), // Shadow color
+                spreadRadius: 5, // Spread radius
+                blurRadius: 7, // Blur radius
+                offset: Offset(0, 3), // Offset
+              ),
+            ],
+          ),
+          child: Container(
+            child: Form(
+              key: _formKey, // Set the form key here
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 400,
+                    height: 196,
+                    child: Image.asset('logo.png'),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: 360.0,
-                    height: 76.0,
-                    child: TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                      ),
-                      validator: (value) {
-                        if (value?.isEmpty ?? true) {
-                          return 'Please enter an email';
-                        }
-                        return null;
-                      },
+                  const SizedBox(height: 20),
+                  Text(
+                    'Manager Login ',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 5, 36, 83),
+                      fontSize: 20,
+                      fontFamily: 'Cormorant Garamond',
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 360.0,
-                    height: 70.0,
-                    child: TextFormField(
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
+                  const SizedBox(height: 16),
+                  Center(
+                    child: SizedBox(
+                      width: 360.0,
+                      height: 70.0,
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                            labelText: 'Email',
+                            filled: true,
+                            fillColor:
+                                const Color.fromARGB(255, 236, 240, 241)),
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return 'Please enter an email';
+                          }
+                          return null;
+                        },
                       ),
-                      obscureText: true,
-                      validator: (value) {
-                        if (value?.isEmpty ?? true) {
-                          return 'Please enter a password';
-                        }
-                        return null;
-                      },
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: 160.0,
-                    height: 36.0,
-                    child: CustomButton(
-                      text: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Cormorant Garamond',
-                          fontWeight: FontWeight.w400,
+                  const SizedBox(height: 16),
+                  Center(
+                    child: SizedBox(
+                      width: 360.0,
+                      height: 70.0,
+                      child: TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            filled: true,
+                            fillColor:
+                                const Color.fromARGB(255, 236, 240, 241)),
+                        obscureText: true,
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return 'Please enter a password';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Center(
+                    child: SizedBox(
+                      width: 160.0,
+                      height: 46.0,
+                      child: CustomButton(
+                        text: Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: 'Cormorant Garamond',
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            _loginWithEmailAndPassword();
+                          }
+                        },
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          _loginWithEmailAndPassword();
-                        }
-                      },
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/user/login');
-                  },
-                  child: Text('User Login'),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Forgot your password?',
-                  style: TextStyle(
-                    color: Color(0xFF161D58),
-                    fontSize: 16,
-                    fontFamily: 'Cormorant Garamond',
-                    fontWeight: FontWeight.w400,
+                  const SizedBox(height: 16),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/user/login');
+                    },
+                    child: Text('User Login'),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  Text(
+                    'Forgot your password?',
+                    style: TextStyle(
+                      color: Color(0xFF161D58),
+                      fontSize: 16,
+                      fontFamily: 'Cormorant Garamond',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
+      backgroundColor: Color.fromARGB(204, 238, 238, 238),
     );
   }
 

@@ -20,7 +20,13 @@ class _CustomTabulationState extends State<CustomTabulation> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        Container(
+          // width: 150,
+          //  height: 100,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: null,
+          ),
           padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
           child: ToggleButtons(
             isSelected: widget.tabs
@@ -33,21 +39,33 @@ class _CustomTabulationState extends State<CustomTabulation> {
                 _currentIndex = index; // Toggle between sections
               });
             },
-            selectedColor: Colors.grey,
-            color: Colors.grey, // Light grey when not clicked
-            fillColor: Color.fromARGB(255, 5, 36, 83), // Dark blue when clicked
+            //   selectedColor: const Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 7, 2, 54), // Light grey when not clicked
+            fillColor: Colors.transparent, // Dark blue when clicked
             children: widget.tabs.map((tab) {
               return SizedBox(
-                width: 150.0, // Increase the size of the rectangles
-                child: Center(
-                  child: Text(
-                    tab,
-                    textAlign: TextAlign.center,
-                    style: _currentIndex == widget.tabs.indexOf(tab)
-                        ? CustomTextStyles
-                            .tabTextSelected // Selected tab text style
-                        : CustomTextStyles
-                            .tabTextUnselected, // Unselected tab text style
+                width: 150.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: null,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20), // Top left corner rounded
+                        topRight:
+                            Radius.circular(20), // Top right corner rounded
+                      ),
+                      color: Color.fromARGB(255, 5, 36, 83) // Background color
+                      //  color: Color.fromARGB(0, 3, 2, 80),
+                      ), // Increase the size of the rectangles
+                  child: Center(
+                    child: Text(
+                      tab,
+                      textAlign: TextAlign.center,
+                      style: _currentIndex == widget.tabs.indexOf(tab)
+                          ? CustomTextStyles
+                              .tabTextSelected // Selected tab text style
+                          : CustomTextStyles
+                              .tabTextUnselected, // Unselected tab text style
+                    ),
                   ),
                 ),
               );

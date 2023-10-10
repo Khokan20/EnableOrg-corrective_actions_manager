@@ -60,6 +60,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
     ]);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white, // Change the primary color
         buttonTheme: ButtonThemeData(
@@ -109,7 +110,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                         Text(
                           'Home',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF161D58),
                             fontFamily: 'Cormorant Garamond',
@@ -132,7 +133,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                         Text(
                           'Reports',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF161D58),
                             fontFamily: 'Cormorant Garamond',
@@ -148,29 +149,33 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(0),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(left: 52),
                       child: Text(
                         'Executive Summary',
                         style: TextStyle(
                           fontFamily: 'Cormorant Garamond',
-                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                           color: Color(0xFF161D58),
                         ),
                       ),
                     ),
                   ),
                   // Toggle button for Reports
-
+                  SizedBox(
+                    height: 4,
+                  ),
                   // Toggle button for Reports
                   InkWell(
                     onTap: () => navigateToPage(5),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(left: 52),
                       child: Text(
                         'Corrective Actions',
                         style: TextStyle(
                           fontFamily: 'Cormorant Garamond',
-                          fontSize: 12,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                           color: Color(0xFF161D58),
                         ),
                       ),
@@ -188,7 +193,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                         Text(
                           'Questionnaires',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF161D58),
                             fontFamily: 'Cormorant Garamond',
@@ -204,27 +209,32 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(1),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(left: 52),
                       child: Text(
                         'Foundation Questionnaire',
                         style: TextStyle(
                           fontFamily: 'Cormorant Garamond',
-                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                           color: Color(0xFF161D58),
                         ),
                       ),
                     ),
                   ),
                   // Toggle button for Pulse Questionnaires
+                  SizedBox(
+                    height: 4,
+                  ),
                   InkWell(
                     onTap: () => navigateToPage(6),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(left: 52),
                       child: Text(
                         'Pulse Questionnaire',
                         style: TextStyle(
                           fontFamily: 'Cormorant Garamond',
-                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                           color: Color(0xFF161D58),
                         ),
                       ),
@@ -245,7 +255,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                         Text(
                           'Wellness Feedback',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF161D58),
                             fontFamily: 'Cormorant Garamond',
@@ -267,7 +277,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                       Text(
                         'Manage',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF161D58),
                           fontFamily: 'Cormorant Garamond',
@@ -284,28 +294,29 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(3),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(left: 52),
                       child: Text(
                         'User Accounts',
                         style: TextStyle(
                           fontFamily: 'Cormorant Garamond',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                           color: Color(0xFF161D58),
                         ),
                       ),
                     ),
                   ),
+                  SizedBox(height: 4),
                   InkWell(
                     onTap: () => navigateToPage(4),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(left: 52),
                       child: Text(
                         'Push Notifications',
                         style: TextStyle(
                           fontFamily: 'Cormorant Garamond',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                           color: Color(0xFF161D58),
                         ),
                       ),
@@ -399,7 +410,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
 
             // Add a line to separate the navigation side and the pages (vertical divider)
             Container(
-              width: 2,
+              width: 1,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.grey[300]!, Colors.grey[200]!],
@@ -409,9 +420,9 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: -2,
+                    spreadRadius: -1,
                     blurRadius: 4,
-                    offset: Offset(-2,
+                    offset: Offset(-1,
                         0), // Update the offset to change the shadow direction
                   ),
                 ],
@@ -435,14 +446,15 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                 index: currentIndex,
                 children: [
                   ManagerReportsHomePage(user: widget.user),
-                  ManagerFoundationQuestionnaireNotificationsPage(user: widget.user),
+                  ManagerFoundationQuestionnaireNotificationsPage(
+                      user: widget.user),
                   ManagerWellnessFeedbackPage(user: widget.user),
                   ManagerUserAccountsPage(user: widget.user),
                   ManagerNotificationPage(
                     user: widget.user,
                   ),
                   ManagerCorrectiveActionsPage(user: widget.user),
-                  ManagerPulseQuestionnaireNotification(user:widget.user),
+                  ManagerPulseQuestionnaireNotification(user: widget.user),
                 ],
               ),
             ),
