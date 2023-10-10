@@ -31,23 +31,7 @@ class _ManagerLoginPageState extends State<ManagerLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          width: 581,
-          height: 680,
-          padding: const EdgeInsets.all(30),
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            shadows: [
-              BoxShadow(
-                color: Color(0x0C000000),
-                blurRadius: 16,
-                offset: Offset(0, 0),
-                spreadRadius: 0,
-              )
-            ],
-          ),
+        child: SingleChildScrollView(
           child: Form(
             key: _formKey, // Set the form key here
             child: Column(
@@ -61,70 +45,39 @@ class _ManagerLoginPageState extends State<ManagerLoginPage> {
                 Text(
                   'Manager Login ',
                   style: TextStyle(
-                    color: Colors.black.withOpacity(0.20000000298023224),
-                    fontSize: 24,
+                    color: Color.fromARGB(255, 5, 36, 83),
+                    fontSize: 20,
                     fontFamily: 'Cormorant Garamond',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 16),
                 Center(
-                  child: Container(
-                      width: 360.0,
-                      height: 41.0,
-                      decoration: BoxDecoration(color: Color(0xFFF0F0F0)),
-                      child: TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border: const UnderlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 1, 2, 14),
-                                width: 0.0), // Bottom Border when focused
-                          ),
-                          hintText: 'Email',
-                          // The MaterialStateProperty's value is a text style that is orange
-                          // by default, but the theme's error color if the input decorator
-                          // is in its error state.
-                          labelStyle: MaterialStateTextStyle.resolveWith(
-                            (Set<MaterialState> states) {
-                              final Color color =
-                                  states.contains(MaterialState.error)
-                                      ? Theme.of(context).colorScheme.error
-                                      : Color.fromARGB(255, 5, 2, 17);
-                              return TextStyle(
-                                  color: color,
-                                  letterSpacing: 1.3,
-                                  height: 41.0);
-                            },
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value?.isEmpty ?? true) {
-                            return 'Enter Email';
-                          }
-                          return null;
-                        },
-                        //  autovalidateMode: AutovalidateMode.always,
-                      )),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: Container(
+                  child: SizedBox(
                     width: 360.0,
-                    height: 41.0,
-                    decoration: BoxDecoration(color: Color(0xFFF0F0F0)),
+                    height: 76.0,
+                    child: TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                      ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Please enter an email';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ),
+                Center(
+                  child: SizedBox(
+                    width: 360.0,
+                    height: 70.0,
                     child: TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
-                        //border: const UnderlineInputBorder(),
-                        border: const UnderlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 1, 2, 14),
-                              width: 0.0), // Bottom Border when focused
-                        ),
-                        hintText: 'Password',
+                        labelText: 'Password',
                       ),
                       obscureText: true,
                       validator: (value) {
@@ -139,14 +92,14 @@ class _ManagerLoginPageState extends State<ManagerLoginPage> {
                 const SizedBox(height: 16),
                 Center(
                   child: SizedBox(
-                    width: 183.0,
-                    height: 58.0,
+                    width: 160.0,
+                    height: 36.0,
                     child: CustomButton(
                       text: Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 28,
+                          fontSize: 16,
                           fontFamily: 'Cormorant Garamond',
                           fontWeight: FontWeight.w400,
                         ),

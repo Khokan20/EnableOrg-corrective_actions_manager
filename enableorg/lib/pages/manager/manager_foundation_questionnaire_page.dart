@@ -1,7 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 
+import 'package:enableorg/ui/customTexts.dart';
 import 'package:enableorg/ui/custom_button.dart';
 import 'package:enableorg/widgets/manager/manager_current_questionnaire.dart';
 import 'package:flutter/material.dart';
@@ -35,18 +34,35 @@ class _ManagerFoundationQuestionnaireNotificationState
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       padding: EdgeInsets.all(16.0),
+      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('New Foundation Questionnaire', style: CustomTextStyles.boldedBodyText),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Send a new questionnaire to the team', style: CustomTextStyles.generalBodyText),
+            ],
+          ),
           SizedBox(height: 16.0),
-          Center(
-            child: SizedBox(
-              width: 180.0,
-              height: 36.0,
-              child: CustomButton(
+          
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 180.0,
+                height: 36.0,
+                child: CustomButton(
                   text: Text(
-                    'Send notification now',
+                    'Send now',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -54,6 +70,7 @@ class _ManagerFoundationQuestionnaireNotificationState
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(Icons.send),
                   onPressed: () async {
                     final QuestionnaireNotification questionnaireNotification =
                         QuestionnaireNotification(
@@ -70,17 +87,22 @@ class _ManagerFoundationQuestionnaireNotificationState
                         questionnaireNotification);
 
                     _showNotificationResultDialog(success);
-                  }),
-            ),
-          ),
-          SizedBox(height: 16.0),
-          Center(
-            child: SizedBox(
-              width: 180.0,
-              height: 36.0,
-              child: CustomButton(
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  'Or',
+                  style: CustomTextStyles.generalBodyText
+                ),
+              ),
+              SizedBox(
+                width: 180.0,
+                height: 36.0,
+                child: CustomButton(
                   text: Text(
-                    'Schedule notification',
+                    'Schedule',                 
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -88,11 +110,15 @@ class _ManagerFoundationQuestionnaireNotificationState
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(Icons.schedule_send),
                   onPressed: () {
                     _selectDate(context);
-                  }),
-            ),
+                  },
+                ),
+              ),
+            ],
           ),
+          SizedBox(height: 16.0),
           ManagerCurrentQuestionnaire(
             expiryDate: notificationController.getFBCurrentExpiryDate,
             getCompletionProgress: notificationController.getCompletionProgressFB,

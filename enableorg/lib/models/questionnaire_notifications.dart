@@ -5,7 +5,8 @@ enum QuestionnaireNotificationTypes {
   FB_REMIND,
   WB_COMPLETE,
   WB_REMIND,
-  PUL_COMPLETE
+  PUL_COMPLETE,
+  ALL_COMPLETE, //new one added
 }
 
 class QuestionnaireNotification {

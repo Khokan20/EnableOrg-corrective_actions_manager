@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enableorg/dto/question_list_and_qnid_DTO.dart';
+import 'package:enableorg/dto/questionList_and_qnid_DTO.dart';
 import 'package:enableorg/models/question_answer.dart';
 import 'package:enableorg/models/questionnaire_notifications.dart';
 import 'package:enableorg/models/user.dart';
@@ -54,14 +54,19 @@ class FoundationBuilderController {
     // Get the FB_COMPLETE date from the most recent notification
     QuestionnaireNotification? notification =
         await getRecentFBQuestionnaireNotification(user);
-    print("${notification?.qnid} Is being checked");
-    DateTime? fbCompletionDate = notification?.expiryTimestamp.toDate();
-    DateTime? fbStartingDate = notification?.startTimestamp.toDate();
-    String? qnid = notification?.qnid;
 
-    if (fbCompletionDate == null ||
-        fbStartingDate == null ||
-        fbStartingDate.isAfter(DateTime.now())) {
+    if (notification == null) {
+      QuestionListAndQnidDTO questionListAndQnidDTO =
+          QuestionListAndQnidDTO(qList: qList, qnid: null);
+      return questionListAndQnidDTO;
+    }
+
+    print("${notification.qnid} Is being checked");
+    DateTime? fbCompletionDate = notification.expiryTimestamp.toDate();
+    DateTime? fbStartingDate = notification.startTimestamp.toDate();
+    String? qnid = notification.qnid;
+
+    if (fbStartingDate.isAfter(DateTime.now())) {
       // Handle the case when no FB_COMPLETE notification is found
       print('No FB_COMPLETE notification found.');
       QuestionListAndQnidDTO questionListAndQnidDTO =
@@ -85,7 +90,9 @@ class FoundationBuilderController {
 
     for (Question question in questions) {
       // Check if the question is a FOUNDATION_BUILDER category
-      if (question.category == QuestionCategory.FOUNDATION_BUILDER) {
+      //basically it is both FOUNDATION_BUILDER and WELLNESS_BUILDER - aniruddha
+      if (question.category == QuestionCategory.FOUNDATION_BUILDER ||
+          question.category == QuestionCategory.WELLNESS_BUILDER) {
         // Has this question been answered already?
         bool isQuestionAnsweredInQuantum = answeredQuestions.any((qa) {
           return qa.qid == question.qid;

@@ -46,7 +46,7 @@ class _ManagerPulseQuestionnaireNotificationState
               height: 36.0,
               child: CustomButton(
                   text: Text(
-                    'Send notification now',
+                    'Send now',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -54,6 +54,7 @@ class _ManagerPulseQuestionnaireNotificationState
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(Icons.send),
                   onPressed: () async {
                     final QuestionnaireNotification questionnaireNotification =
                         QuestionnaireNotification(
@@ -80,7 +81,7 @@ class _ManagerPulseQuestionnaireNotificationState
               height: 36.0,
               child: CustomButton(
                   text: Text(
-                    'Schedule notification',
+                    'Schedule',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -88,6 +89,7 @@ class _ManagerPulseQuestionnaireNotificationState
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  icon: Icon(Icons.schedule_send),
                   onPressed: () {
                     _selectDate(context);
                   }),

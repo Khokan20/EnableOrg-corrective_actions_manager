@@ -53,33 +53,13 @@ class _UserLoginPageState extends State<UserLoginPage> {
                 ),
                 const SizedBox(height: 16),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     width: 360.0,
-                    height: 41.0,
-                    decoration: BoxDecoration(color: Color(0xFFF0F0F0)),
+                    height: 76.0,
                     child: TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 6, 3, 26), width: 2.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 1, 2, 14),
-                              width: 0.0), // Bottom Border when focused
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 7, 5, 26), width: 0.0),
-                          // Left Border when not focused
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.orange,
-                              width: 0.0), // Right Border on error
-                        ),
-                        hintText: 'Email',
+                        labelText: 'Email',
                       ),
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
@@ -90,22 +70,14 @@ class _UserLoginPageState extends State<UserLoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     width: 360.0,
-                    height: 41.0,
-                    decoration: BoxDecoration(color: Color(0xFFF0F0F0)),
+                    height: 70.0,
                     child: TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
-                        border: const UnderlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 1, 2, 14),
-                              width: 0.0), // Bottom Border when focused
-                        ),
-                        hintText: 'Password',
+                        labelText: 'Password',
                       ),
                       obscureText: true,
                       validator: (value) {
@@ -120,14 +92,14 @@ class _UserLoginPageState extends State<UserLoginPage> {
                 const SizedBox(height: 16),
                 Center(
                   child: SizedBox(
-                    width: 183.0,
-                    height: 58.0,
+                    width: 160.0,
+                    height: 36.0,
                     child: CustomButton(
                       text: Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 28,
+                          fontSize: 16,
                           fontFamily: 'Cormorant Garamond',
                           fontWeight: FontWeight.w400,
                         ),

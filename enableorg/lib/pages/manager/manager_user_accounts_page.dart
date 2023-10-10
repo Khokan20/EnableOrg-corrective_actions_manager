@@ -60,67 +60,69 @@ class _ManagerUserAccountsPageState extends State<ManagerUserAccountsPage> {
         title: Text('Manager User Accounts'),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: ManagerUserAccountsForm(
-                  isManager: _controller.isManager,
-                  onToggleManager: _controller.toggleManager,
-                  onRegisterUser: _controller.registerUser,
-                  currentUser: widget.user,
-                  getDepartments: _controller.getDepartments,
-                  getLocations: _controller.getLocations,
-                ),
-              ),
-              ManagerUserUploadForm(
-                onCSVUpload: onCSVUpload,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+      body: Container(
+        child: Column(
+          children: [
+            Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      labelText: 'Search',
-                      border: OutlineInputBorder(),
-                    ),
+                  child: ManagerUserAccountsForm(
+                    isManager: _controller.isManager,
+                    onToggleManager: _controller.toggleManager,
+                    onRegisterUser: _controller.registerUser,
+                    currentUser: widget.user,
+                    getDepartments: _controller.getDepartments,
+                    getLocations: _controller.getLocations,
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                  height: 50,
-                ),
-                ElevatedButton(
-                  onPressed: searchUsers,
-                  child: Text('Search'),
+                ManagerUserUploadForm(
+                  onCSVUpload: onCSVUpload,
                 ),
               ],
             ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: UserListView(
-                currentUser: widget.user,
-                getUsers: getUsersWithSearch,
-                searchParam: _searchController.text,
-                onEdit: _controller.onEdit,
-                onDelete: _controller.onDelete,
-                getDepartments: _controller.getDepartments,
-                getLocations:
-                    _controller.getLocations, // Pass the searchParam value
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        labelText: 'Search',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                    height: 50,
+                  ),
+                  ElevatedButton(
+                    onPressed: searchUsers,
+                    child: Text('Search'),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: SingleChildScrollView(
+                child: UserListView(
+                  currentUser: widget.user,
+                  getUsers: getUsersWithSearch,
+                  searchParam: _searchController.text,
+                  onEdit: _controller.onEdit,
+                  onDelete: _controller.onDelete,
+                  getDepartments: _controller.getDepartments,
+                  getLocations:
+                      _controller.getLocations, // Pass the searchParam value
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

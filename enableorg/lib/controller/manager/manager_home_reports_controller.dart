@@ -8,6 +8,7 @@ import 'package:enableorg/dto/type_component_answers_DTO.dart';
 import 'package:enableorg/models/question.dart';
 import 'package:enableorg/models/question_answer.dart';
 import 'package:enableorg/ui/circle_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../models/questionnaire_notifications.dart';
 import '../../ui/circle_group.dart';
@@ -19,6 +20,15 @@ class ManagerHomeReportsController {
     3. Location list - List of LIDs - recognise which users to query by sitelocation
     4. Date - Date of the report - ResultType Latest or 6 months ago or year ago
   */
+  String? getCurrentUserID() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      print(user.uid);
+      return user.uid;
+    } else {
+      return null; // User is not logged in
+    }
+  }
 
   Map<String, List<int>> formatKeys(Map<String, List<int>> data) {
     Map<String, List<int>> formattedData = {};
@@ -37,7 +47,7 @@ class ManagerHomeReportsController {
     Map<String, List<int>>? averagedGroupMap =
         await getAveragesFoundationClimate(
             ResultType.latest,
-            'klyW3TzL7uYRRkrRf9HMhhVzLKy1',
+            getCurrentUserID().toString(),
             QuestionnaireNotificationTypes.FB_COMPLETE);
 
     if (averagedGroupMap == null) {
@@ -54,15 +64,16 @@ class ManagerHomeReportsController {
   }
 
   Future<CircleConfig?>? getPulseConfig() async {
-    Map<String, List<int>>? averagedGroupMap =
-        await getAveragesFoundationClimate(
-            ResultType.latest,
-            'klyW3TzL7uYRRkrRf9HMhhVzLKy1',
-            QuestionnaireNotificationTypes.PUL_COMPLETE);
-    if (averagedGroupMap == null) {
-      return null;
-    }
-    averagedGroupMap = formatKeys(averagedGroupMap);
+    Map<String, List<int>>? averagedGroupMap = await getAveragesPulseClimate(
+        ResultType.latest,
+        getCurrentUserID().toString(),
+        QuestionnaireNotificationTypes
+            .WB_COMPLETE); //will try with WB_COMPLETE first
+    averagedGroupMap ??= await getAveragesPulseClimate(
+        ResultType.latest,
+        getCurrentUserID().toString(),
+        QuestionnaireNotificationTypes.FB_COMPLETE); //default is FB_COMPLETE
+    averagedGroupMap = formatKeys(averagedGroupMap!);
 
     CircleConfig pulConfig = CircleConfig(groups: []);
     averagedGroupMap.forEach((component, values) {
@@ -73,15 +84,17 @@ class ManagerHomeReportsController {
   }
 
   Future<CircleConfig?>? getWBConfig() async {
-    Map<String, List<int>>? averagedGroupMap =
-        await getAveragesFoundationClimate(
-            ResultType.latest,
-            'klyW3TzL7uYRRkrRf9HMhhVzLKy1',
-            QuestionnaireNotificationTypes.WB_COMPLETE);
-    if (averagedGroupMap == null) {
-      return null;
-    }
-    averagedGroupMap = formatKeys(averagedGroupMap);
+    Map<String, List<int>>? averagedGroupMap = await getAveragesCWBClimate(
+        ResultType.latest,
+        getCurrentUserID().toString(),
+        QuestionnaireNotificationTypes
+            .WB_COMPLETE); //will try with WB_COMPLETE first
+    averagedGroupMap ??= await getAveragesPulseClimate(
+        ResultType.latest,
+        getCurrentUserID().toString(),
+        QuestionnaireNotificationTypes.FB_COMPLETE); //default is FB_COMPLETE
+    averagedGroupMap = formatKeys(averagedGroupMap!);
+
     CircleConfig wbConfig = CircleConfig(groups: []);
     averagedGroupMap.forEach((component, values) {
       wbConfig.groups.add(CircleGroup(name: component, values: values));
@@ -118,7 +131,125 @@ class ManagerHomeReportsController {
         final qid = questionAndAnswer.qid;
         QuestionsAndIdentificationDTO? relevantQuestion;
         for (var question in questionsAndIdentification) {
-          if (question.qid == qid) {
+          //PRC
+          if (question.qid == qid &&
+              (question.type.toString().contains('PRC'))) {
+            relevantQuestion = question;
+          }
+        }
+        if (relevantQuestion == null) {
+          continue;
+        }
+        // If qid does not exist already in dictionary
+        if (!questionAndAllAnswers.containsKey(qid)) {
+          questionAndAllAnswers[qid] = TypeComponentAnswersDTO(
+              component: relevantQuestion.component,
+              type: relevantQuestion.type,
+              answers: []);
+        }
+        // Append the data object to the list for the corresponding qid
+        questionAndAllAnswers[qid]!.answers?.add(questionAndAnswer.answer);
+      }
+    });
+
+    // Sort QuestionAnswerAll
+    List<MapEntry<String, TypeComponentAnswersDTO>> sortedEntries =
+        questionAndAllAnswers.entries.toList()
+          ..sort((a, b) => a.value.type.index.compareTo(b.value.type.index));
+    LinkedHashMap<String, TypeComponentAnswersDTO> sortedMap =
+        LinkedHashMap.fromEntries(sortedEntries);
+
+    Map<String, List<int>> averagedComponents =
+        calculateComponentAverages(sortedMap);
+    return averagedComponents;
+  }
+
+  Future<Map<String, List<int>>?> getAveragesPulseClimate(
+      ResultType periodResultType,
+      String managerUID,
+      QuestionnaireNotificationTypes type) async {
+    //Convert to monhs ago
+    final String? qnid = await getQnidByResultType(
+        periodResultType, managerUID, type); //Change to parameter
+
+    if (qnid == null) {
+      return null;
+    }
+
+    final Map<String, List<QuestionAndAnswerDTO>> questionAnswersByQnid =
+        await getQuestionAnswersByQnid(qnid);
+    List<Question> questionsList = await Question.getQuestions();
+    List<QuestionsAndIdentificationDTO> questionsAndIdentification =
+        QuestionsAndIdentificationDTO.mapFromQuestions(questionsList);
+
+    Map<String, TypeComponentAnswersDTO> questionAndAllAnswers = {};
+    questionAnswersByQnid.forEach((user, questionAndAnswerList) {
+      // Loop through each answer user has given
+      for (var questionAndAnswer in questionAndAnswerList) {
+        final qid = questionAndAnswer.qid;
+        QuestionsAndIdentificationDTO? relevantQuestion;
+        for (var question in questionsAndIdentification) {
+          //PUL
+          if (question.qid == qid &&
+              (question.type.toString().contains('PUL'))) {
+            relevantQuestion = question;
+          }
+        }
+        if (relevantQuestion == null) {
+          continue;
+        }
+        // If qid does not exist already in dictionary
+        if (!questionAndAllAnswers.containsKey(qid)) {
+          questionAndAllAnswers[qid] = TypeComponentAnswersDTO(
+              component: relevantQuestion.component,
+              type: relevantQuestion.type,
+              answers: []);
+        }
+        // Append the data object to the list for the corresponding qid
+        questionAndAllAnswers[qid]!.answers?.add(questionAndAnswer.answer);
+      }
+    });
+
+    // Sort QuestionAnswerAll
+    List<MapEntry<String, TypeComponentAnswersDTO>> sortedEntries =
+        questionAndAllAnswers.entries.toList()
+          ..sort((a, b) => a.value.type.index.compareTo(b.value.type.index));
+    LinkedHashMap<String, TypeComponentAnswersDTO> sortedMap =
+        LinkedHashMap.fromEntries(sortedEntries);
+
+    Map<String, List<int>> averagedComponents =
+        calculateComponentAverages(sortedMap);
+    return averagedComponents;
+  }
+
+  Future<Map<String, List<int>>?> getAveragesCWBClimate(
+      ResultType periodResultType,
+      String managerUID,
+      QuestionnaireNotificationTypes type) async {
+    //Convert to monhs ago
+    final String? qnid = await getQnidByResultType(
+        periodResultType, managerUID, type); //Change to parameter
+
+    if (qnid == null) {
+      return null;
+    }
+
+    final Map<String, List<QuestionAndAnswerDTO>> questionAnswersByQnid =
+        await getQuestionAnswersByQnid(qnid);
+    List<Question> questionsList = await Question.getQuestions();
+    List<QuestionsAndIdentificationDTO> questionsAndIdentification =
+        QuestionsAndIdentificationDTO.mapFromQuestions(questionsList);
+
+    Map<String, TypeComponentAnswersDTO> questionAndAllAnswers = {};
+    questionAnswersByQnid.forEach((user, questionAndAnswerList) {
+      // Loop through each answer user has given
+      for (var questionAndAnswer in questionAndAnswerList) {
+        final qid = questionAndAnswer.qid;
+        QuestionsAndIdentificationDTO? relevantQuestion;
+        for (var question in questionsAndIdentification) {
+          //CWB
+          if (question.qid == qid &&
+              (question.type.toString().contains('CWB'))) {
             relevantQuestion = question;
           }
         }

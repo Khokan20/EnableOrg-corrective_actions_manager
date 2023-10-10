@@ -2,6 +2,7 @@ import 'package:enableorg/dto/completion_progress_DTO.dart';
 import 'package:enableorg/dto/time_result_types.dart';
 import 'package:enableorg/models/user.dart';
 import 'package:enableorg/ui/custom_button.dart';
+import 'package:enableorg/ui/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -66,7 +67,7 @@ class _ManagerFbCurrentQuestionnaireState
       children: [
         SizedBox(height: 16.0),
         _expiry_date != null
-            ? Text('Current Questionnaire Expires on $_expiry_date_string',
+            ? Text('Current Questionnaire Expires on\n $_expiry_date_string',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -74,28 +75,37 @@ class _ManagerFbCurrentQuestionnaireState
                   fontWeight: FontWeight.w400,
                 ))
             : SizedBox(), // Placeholder if _expiry_date is null
-        DropdownButton<ResultType>(
-          value: _selectedResultType,
-          onChanged: (value) {
-            setState(() {
-              _selectedResultType = value!;
-              _updateCompletionProgress();
-            });
-          },
-          items: [
-            DropdownMenuItem(
-              value: ResultType.latest,
-              child: Text('Latest'),
+        SizedBox(
+          width: 180.0, // Set the width to 180
+          height: 36.0, // Set the height to 36
+          child: Align(
+            alignment: Alignment.centerLeft, // Align the dropdown to the left
+            child: SingleChildScrollView( // Wrap the dropdown with SingleChildScrollView
+              child: CustomDropdown<ResultType>(
+                value: _selectedResultType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedResultType = value!;
+                    _updateCompletionProgress();
+                  });
+                },
+                items: [
+                  DropdownMenuItem(
+                    value: ResultType.latest,
+                    child: Text('Latest'),
+                  ),
+                  DropdownMenuItem(
+                    value: ResultType.sixMonthsAgo,
+                    child: Text('6 months ago'),
+                  ),
+                  DropdownMenuItem(
+                    value: ResultType.oneYearAgo,
+                    child: Text('12 months ago'),
+                  ),
+                ],
+              ),
             ),
-            DropdownMenuItem(
-              value: ResultType.sixMonthsAgo,
-              child: Text('6 Months Ago'),
-            ),
-            DropdownMenuItem(
-              value: ResultType.oneYearAgo,
-              child: Text('1 Year Ago'),
-            ),
-          ],
+          ),
         ),
         SizedBox(height: 16.0),
         CustomLinearProgressIndicator(
@@ -104,17 +114,18 @@ class _ManagerFbCurrentQuestionnaireState
           startColor: Colors.red[700]!, // Dark red
           endColor: Colors.green[700]!, // Dark green
         ),
-        SizedBox(height: 8.0),
+        SizedBox(height: 16.0),
         Text(
             'Completion Progress: $_completionProgress out of $_totalCompletion'),
         SizedBox(height: 16.0), // Add some space before the button
-        Center(
+        Align(
+          alignment: Alignment.centerLeft,
           child: SizedBox(
             width: 180.0,
             height: 36.0,
             child: CustomButton(
                 text: Text(
-                  'Send Reminder',
+                  'Send Notification',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

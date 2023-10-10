@@ -158,7 +158,7 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
                             height: circleHeight,
                             child: ConcentricCircles(
                               coloursPerLevel: coloursPerLevelPRC,
-                              label: "Psychological Risk Climate",
+                              label: "Psychosocial Risk Climate",
                               config: circleConfigPRC!,
                               width: circleWidth,
                               height: circleHeight,

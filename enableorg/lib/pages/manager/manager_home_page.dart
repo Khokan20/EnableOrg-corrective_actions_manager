@@ -1,6 +1,6 @@
 import 'package:enableorg/models/user.dart';
 import 'package:enableorg/pages/manager/manager_pulse_questionnaire_page.dart';
-import 'package:enableorg/pages/manager/manager_questionnaire_notifications.dart';
+import 'package:enableorg/pages/manager/manager_foundation_questionnaire_notifications.dart';
 import 'package:enableorg/pages/manager/manager_user_accounts_page.dart';
 import 'package:enableorg/pages/manager/manager_wellness_feedback_page.dart';
 import 'package:enableorg/pages/manager/manager_notification_page.dart';
@@ -81,7 +81,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
             // First section for the logo and the toggles (left side)
             Container(
               width: 250, // Set the width for the navigation side
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -148,7 +148,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(0),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 42),
+                      padding: EdgeInsets.only(left: 32),
                       child: Text(
                         'Executive Summary',
                         style: TextStyle(
@@ -165,7 +165,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(5),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 42),
+                      padding: EdgeInsets.only(left: 32),
                       child: Text(
                         'Corrective Actions',
                         style: TextStyle(
@@ -204,7 +204,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(1),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 42),
+                      padding: EdgeInsets.only(left: 32),
                       child: Text(
                         'Foundation Questionnaire',
                         style: TextStyle(
@@ -219,7 +219,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(6),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 42),
+                      padding: EdgeInsets.only(left: 32),
                       child: Text(
                         'Pulse Questionnaire',
                         style: TextStyle(
@@ -284,7 +284,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(3),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 42),
+                      padding: EdgeInsets.only(left: 32),
                       child: Text(
                         'User Accounts',
                         style: TextStyle(
@@ -299,7 +299,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   InkWell(
                     onTap: () => navigateToPage(4),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 42),
+                      padding: EdgeInsets.only(left: 32),
                       child: Text(
                         'Push Notifications',
                         style: TextStyle(
@@ -435,14 +435,14 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                 index: currentIndex,
                 children: [
                   ManagerReportsHomePage(user: widget.user),
-                  ManagerQuestionnaireNotificationsPage(user: widget.user),
+                  ManagerFoundationQuestionnaireNotificationsPage(user: widget.user),
                   ManagerWellnessFeedbackPage(user: widget.user),
                   ManagerUserAccountsPage(user: widget.user),
                   ManagerNotificationPage(
                     user: widget.user,
                   ),
                   ManagerCorrectiveActionsPage(user: widget.user),
-                  ManagerPulseQuestionnaireNotification(user: widget.user),
+                  ManagerPulseQuestionnaireNotification(user:widget.user),
                 ],
               ),
             ),

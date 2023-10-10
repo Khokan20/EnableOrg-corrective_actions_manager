@@ -1,6 +1,7 @@
 import 'package:enableorg/controller/user/foundation_builder_controller.dart';
 import 'package:enableorg/models/user.dart';
 import 'package:enableorg/pages/user/foundation_builder_page.dart';
+import 'package:enableorg/pages/user/user_my_core_wellbeing_page.dart';
 import 'package:enableorg/pages/user/user_profile_page.dart';
 import 'package:enableorg/pages/user/wellness_builder_page.dart';
 import 'package:enableorg/pages/user/user_wellness_check_page.dart';
@@ -150,7 +151,7 @@ class _UserHomePageState extends State<UserHomePage> {
                   ),
                 ),
                 InkWell(
-                  onTap: () => navigateToPage(0),
+                  onTap: () => navigateToPage(4),
                   child: Padding(
                     padding: EdgeInsets.only(left: 32),
                     child: Text(
@@ -317,6 +318,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 WellnessBuilderPage(user: widget.user),
                 UserWellnessCheckPage(user: widget.user),
                 UserProfilePage(user: widget.user),
+                UserMyCoreWellbeingPage(user: widget.user),
                 // Add other destination widgets as needed
               ],
             ),

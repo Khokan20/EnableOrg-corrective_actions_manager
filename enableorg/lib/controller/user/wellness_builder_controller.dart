@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enableorg/dto/question_list_and_qnid_DTO.dart';
+import 'package:enableorg/dto/questionList_and_qnid_DTO.dart';
 import 'package:enableorg/models/question_answer.dart';
 import 'package:enableorg/models/questionnaire_notifications.dart';
 import 'package:enableorg/models/user.dart';
@@ -54,14 +54,18 @@ class WellnessBuilderController {
     // Get the WB_COMPLETE date from the most recent notification
     QuestionnaireNotification? notification =
         await getRecentFBQuestionnaireNotification(user);
-    print("${notification?.qnid} Is being checked");
-    DateTime? wbCompletionDate = notification?.expiryTimestamp.toDate();
-    DateTime? fbStartingDate = notification?.startTimestamp.toDate();
-    String? qnid = notification?.qnid;
 
-    if (wbCompletionDate == null ||
-        fbStartingDate == null ||
-        fbStartingDate.isAfter(DateTime.now())) {
+    if (notification == null) {
+      QuestionListAndQnidDTO questionListAndQnidDTO =
+          QuestionListAndQnidDTO(qList: qList, qnid: null);
+      return questionListAndQnidDTO;
+    }
+    print("${notification.qnid} Is being checked");
+    DateTime? wbCompletionDate = notification.expiryTimestamp.toDate();
+    DateTime? fbStartingDate = notification.startTimestamp.toDate();
+    String? qnid = notification.qnid;
+
+    if (fbStartingDate.isAfter(DateTime.now())) {
       // Handle the case when no WB_COMPLETE notification is found
       print('No WB_COMPLETE notification found.');
       QuestionListAndQnidDTO questionListAndQnidDTO =

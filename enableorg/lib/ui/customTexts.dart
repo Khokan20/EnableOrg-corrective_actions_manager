@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextStyles {
   static const TextStyle generalHeaderText = TextStyle(
     fontFamily: 'Cormorant Garamond',
-    fontSize: 24, // Adjust the size accordingly
+    fontSize: 34, // Adjust the size accordingly
     color: Color.fromARGB(255, 0, 0, 0), // Your specified shade of blue
     fontWeight: FontWeight.bold,
   );

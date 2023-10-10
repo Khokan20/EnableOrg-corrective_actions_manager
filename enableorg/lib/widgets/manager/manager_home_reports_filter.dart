@@ -50,21 +50,23 @@ class _HomeReportsFilterState extends State<HomeReportsFilter> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: mainFilters.map((filter) {
-            return ListTile(
-              title: Text(filter),
-              onTap: () {
-                setState(() {
-                  _selectedMainFilter = filter;
-                  _selectedSubFilters.clear();
-                });
-                Navigator.of(context).pop();
-                _showSubFilterDropdown(context);
-              },
-            );
-          }).toList(),
+        return Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: mainFilters.map((filter) {
+              return ListTile(
+                title: Text(filter),
+                onTap: () {
+                  setState(() {
+                    _selectedMainFilter = filter;
+                    _selectedSubFilters.clear();
+                  });
+                  Navigator.of(context).pop();
+                  _showSubFilterDropdown(context);
+                },
+              );
+            }).toList(),
+          ),
         );
       },
     );
@@ -83,25 +85,27 @@ class _HomeReportsFilterState extends State<HomeReportsFilter> {
         final List<String> subFilterList =
             subFilters[_selectedMainFilter!] ?? [];
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: subFilterList.map((filter) {
-            return CheckboxListTile(
-              title: Text(filter),
-              value: _selectedSubFilters.contains(filter),
-              onChanged: (value) {
-                setState(() {
-                  if (value != null) {
-                    if (value) {
-                      _selectedSubFilters.add(filter);
-                    } else {
-                      _selectedSubFilters.remove(filter);
+        return Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: subFilterList.map((filter) {
+              return CheckboxListTile(
+                title: Text(filter),
+                value: _selectedSubFilters.contains(filter),
+                onChanged: (value) {
+                  setState(() {
+                    if (value != null) {
+                      if (value) {
+                        _selectedSubFilters.add(filter);
+                      } else {
+                        _selectedSubFilters.remove(filter);
+                      }
                     }
-                  }
-                });
-              },
-            );
-          }).toList(),
+                  });
+                },
+              );
+            }).toList(),
+          ),
         );
       },
     );

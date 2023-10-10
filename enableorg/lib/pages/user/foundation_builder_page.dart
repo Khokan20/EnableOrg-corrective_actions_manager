@@ -3,7 +3,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enableorg/dto/question_list_and_qnid_DTO.dart';
+import 'package:enableorg/dto/questionList_and_qnid_DTO.dart';
 import 'package:enableorg/models/question_answer.dart';
 import 'package:enableorg/models/user.dart';
 import 'package:enableorg/ui/custom_slider.dart';
