@@ -90,7 +90,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   SizedBox(
                     height: 15,
                   ),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 5)),
                   Center(
                     child: Image.asset(
                       "managercons_transp.png",
@@ -403,7 +403,22 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                     ),
                   ),
 
-                  SizedBox(height: 8),
+                  SizedBox(height: 2),
+
+                  SizedBox(
+                      height:
+                          10), // Add spacing between user name and logout button
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 1),
+                    child: Text(
+                      '© 2023 EnableOrg', // Replace 'Your Company Name' with your actual company name
+                      style: TextStyle(
+                        fontFamily: 'Cormorant Garamond',
+                        fontSize: 12,
+                        color: Color(0xFF161D58),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

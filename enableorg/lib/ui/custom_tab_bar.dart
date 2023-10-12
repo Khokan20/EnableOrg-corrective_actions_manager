@@ -24,8 +24,12 @@ class _CustomTabulationState extends State<CustomTabulation> {
           // width: 150,
           //  height: 100,
           decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: null,
+          //  color: Colors.transparent,
+           // border: null,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), // Top left corner rounded
+              topRight: Radius.circular(20), // Top right corner rounded
+            ),
           ),
           padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
           child: ToggleButtons(
@@ -39,9 +43,14 @@ class _CustomTabulationState extends State<CustomTabulation> {
                 _currentIndex = index; // Toggle between sections
               });
             },
+             borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20), // Top left corner rounded
+                        topRight:
+                            Radius.circular(20), // Top right corner rounded
+                      ),
             //   selectedColor: const Color.fromARGB(255, 255, 255, 255),
             color: Color.fromARGB(255, 7, 2, 54), // Light grey when not clicked
-            fillColor: Colors.transparent, // Dark blue when clicked
+          //  fillColor: Colors.transparent, // Dark blue when clicked
             children: widget.tabs.map((tab) {
               return SizedBox(
                 width: 150.0,

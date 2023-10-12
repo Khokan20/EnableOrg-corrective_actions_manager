@@ -57,7 +57,6 @@ class _UserMyCoreWellbeingPageState extends State<UserMyCoreWellbeingPage> {
     // return Padding(
     // padding: EdgeInsets.only(left: 105),
     return CustomTabulation(
-      
       tabs: [
         'My Core Wellbeing', // First Tab
       ],

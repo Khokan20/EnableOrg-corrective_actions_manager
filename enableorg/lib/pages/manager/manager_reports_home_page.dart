@@ -122,11 +122,215 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
     setState(() {});
   }
 
+  String pageTitle = 'Home';
   @override
   Widget build(BuildContext context) {
     // return Padding(
     // padding: EdgeInsets.only(left: 105),
-    return CustomTabulation(
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 5, // Change this to the number of tabs you need
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                pageTitle,
+                style: TextStyle(
+                  fontSize: 24, // Adjust the font size as needed
+                  fontFamily: 'Cormorant Garamond',
+                  fontWeight:
+                      FontWeight.bold, // Adjust the font weight as needed
+                ),
+              ),
+            ),
+            body: CustomTabulation(
+              tabs: [
+                'Foundation Climate', // First Tab
+                'Pulse Climate', // Second Tab
+              ],
+              tabContent: [
+                // First Tab View
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Your existing code for Foundation Climate here
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                            padding: EdgeInsets.only(top: 15, left: 18),
+                            child: HomeReportsFilter()),
+                      ),
+                      SizedBox(height: headerSpacing), // Add spacing
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth < 850) {
+                            // Switch to vertical layout if the screen width is less than 600
+                            return Column(
+                              children: [
+                                if (circleConfigPRC != null)
+                                  SizedBox(
+                                    width: circleWidth,
+                                    height: circleHeight,
+                                    child: ConcentricCircles(
+                                      coloursPerLevel: coloursPerLevelPRC,
+                                      label: "Psychosocial Risk Climate",
+                                      config: circleConfigPRC!,
+                                      width: circleWidth,
+                                      height: circleHeight,
+                                    ),
+                                  ),
+                                if (circleConfigPRC != null)
+                                  SizedBox(height: smallScreenHeightSpacing),
+                                if (circleConfigWB != null)
+                                  SizedBox(
+                                    width: circleWidth,
+                                    height: circleHeight,
+                                    child: ConcentricCircles(
+                                      coloursPerLevel: coloursPerLevelWB,
+                                      label: "Core Wellbeing Climate",
+                                      config: circleConfigWB!,
+                                      width: circleWidth,
+                                      height: circleHeight,
+                                    ),
+                                  ),
+                                if (circleConfigWB != null)
+                                  SizedBox(height: scrollOffset),
+                              ],
+                            );
+                          } else {
+                            // Use horizontal layout for larger screens
+                            return Column(children: [
+                              Column(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (circleConfigPRC != null)
+                                      SizedBox(
+                                        width: circleWidth,
+                                        height: circleHeight,
+                                        child: ConcentricCircles(
+                                          coloursPerLevel: coloursPerLevelPRC,
+                                          label: "Psychological Risk Climate",
+                                          config: circleConfigPRC!,
+                                          height: circleHeight,
+                                          width: circleWidth,
+                                        ),
+                                      ),
+                                    if (circleConfigPRC != null)
+                                      SizedBox(
+                                          width:
+                                              90), // Add spacing between circles
+                                    if (circleConfigWB != null)
+                                      SizedBox(
+                                        width: circleWidth,
+                                        height: circleHeight,
+                                        child: ConcentricCircles(
+                                          coloursPerLevel: coloursPerLevelWB,
+                                          label: "Core Wellbeing Climate",
+                                          config: circleConfigWB!,
+                                          height: circleHeight,
+                                          width: circleWidth,
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                SizedBox(height: scrollOffset),
+                              ])
+                            ]);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Second Tab View
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Your existing code for Pulse Climate here
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 15, left: 18),
+                          child: Text(
+                            'Reports',
+                            style: CustomTextStyles.generalHeaderText,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: headerSpacing), // Add spacing
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth < 700) {
+                            // Switch to vertical layout if the screen width is less than 600
+                            return Column(
+                              children: [
+                                if (circleConfigPulse != null)
+                                  SizedBox(
+                                    width: circleWidth,
+                                    height: circleHeight,
+                                    child: ConcentricCircles(
+                                      coloursPerLevel:
+                                          coloursPerLevelPUL, // Adjust colors as needed
+                                      label: "Pulse Climate",
+                                      config:
+                                          circleConfigPulse!, // Adjust configuration as needed
+                                      width: circleWidth,
+                                      height: circleHeight,
+                                    ),
+                                  ),
+                                SizedBox(height: smallScreenHeightSpacing),
+                                // Add more widgets as needed for Pulse Climate
+                                SizedBox(height: scrollOffset),
+                              ],
+                            );
+                          } else {
+                            // Use horizontal layout for larger screens
+                            return Column(
+                              children: [
+                                Column(children: [
+                                  if (circleConfigPulse != null)
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: circleWidth,
+                                          height: circleHeight,
+                                          child: ConcentricCircles(
+                                            coloursPerLevel:
+                                                coloursPerLevelPUL, // Adjust colors as needed
+                                            label: "Pulse Climate",
+                                            config:
+                                                circleConfigPulse!, // Adjust configuration as needed
+                                            height: circleHeight,
+                                            width: circleWidth,
+                                          ),
+                                        ),
+                                        // Add more widgets as needed for Pulse Climate
+                                      ],
+                                    ),
+                                ]),
+                                SizedBox(
+                                  height: smallScreenHeightSpacing,
+                                ),
+                                // Add more widgets as needed for Pulse Climate
+                              ],
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )),
+      ),
+    );
+
+    /*
+    CustomTabulation(
+      
       tabs: [
         'Foundation Climate', // First Tab
         'Pulse Climate', // Second Tab
@@ -308,5 +512,6 @@ class _ManagerReportsHomePageState extends State<ManagerReportsHomePage> {
         ),
       ],
     );
+  */
   }
 }

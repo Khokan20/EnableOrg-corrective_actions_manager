@@ -75,7 +75,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'Foundation Builder',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color:
                             currentIndex == 0 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -93,7 +94,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'Wellness Builder',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color:
                             currentIndex == 0 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -110,7 +112,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'Wellness Check',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         color:
                             currentIndex == 0 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -126,7 +129,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'Assigned Actions',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         color:
                             currentIndex == 0 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -143,7 +147,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'My Profile',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         color:
                             currentIndex == 1 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -158,7 +163,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'My Core WellBeing',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color:
                             currentIndex == 0 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -175,7 +181,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'My Wellbeing Plan',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color:
                             currentIndex == 1 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -191,7 +198,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       'My Work',
                       style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
-                        fontSize: 16,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color:
                             currentIndex == 1 ? Color(0xFF161D58) : Colors.grey,
                       ),
@@ -227,6 +235,7 @@ class _UserHomePageState extends State<UserHomePage> {
                           style: TextStyle(
                             fontFamily: 'Cormorant Garamond',
                             fontSize: 14,
+                            fontWeight: FontWeight.bold,
                             color: Color(0xFF161D58),
                           ),
                         ),
@@ -248,7 +257,8 @@ class _UserHomePageState extends State<UserHomePage> {
                           'Logout',
                           style: TextStyle(
                             fontFamily: 'Cormorant Garamond',
-                            fontSize: 14,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                             color: Color(0xFF161D58),
                           ),
                         ),
